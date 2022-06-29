@@ -3,13 +3,15 @@ from typing import TYPE_CHECKING, Optional
 
 from django.db import models
 
+from shared.models import TimestampMixin
+
 
 if TYPE_CHECKING:
     from bands.models import BandForeignKey
     from shared.models import GenreM2M
 
 
-class Album(models.Model):
+class Album(TimestampMixin, models.Model):
     name = models.CharField(max_length=50)
     band: "BandForeignKey" = models.ForeignKey(
         "bands.Band", on_delete=models.CASCADE, related_name="albums"
@@ -39,7 +41,7 @@ class Album(models.Model):
         return Decimal()
 
 
-class Song(models.Model):
+class Song(TimestampMixin, models.Model):
     name = models.CharField(max_length=100)
     genre: "GenreM2M" = models.ManyToManyField(
         "shared.Genre", related_name="songs"

@@ -3,6 +3,8 @@ from typing import TYPE_CHECKING, Optional, Union
 from django.db import models
 from django.db.models.expressions import Combinable
 
+from shared.models import TimestampMixin
+
 
 if TYPE_CHECKING:
     from albums.models import Song
@@ -12,7 +14,7 @@ if TYPE_CHECKING:
 BandForeignKey = models.ForeignKey[Union["Band", Combinable], "Band"]
 
 
-class Band(models.Model):
+class Band(TimestampMixin, models.Model):
     name = models.CharField(max_length=50)
     genre: "GenreM2M" = models.ManyToManyField(
         "shared.Genre", related_name="bands"
@@ -46,7 +48,7 @@ class Band(models.Model):
         return None
 
 
-class BandMember(models.Model):
+class BandMember(TimestampMixin, models.Model):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     band: BandForeignKey = models.ForeignKey(

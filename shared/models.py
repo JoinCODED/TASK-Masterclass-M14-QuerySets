@@ -27,7 +27,7 @@ class GenreBy(IntEnum):
     revenue = auto()
 
 
-class Genre(models.Model):
+class Genre(TimestampMixin, models.Model):
     name = models.CharField(max_length=25)
 
     def __str__(self) -> str:
