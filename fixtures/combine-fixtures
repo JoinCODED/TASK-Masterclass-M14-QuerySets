@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cat shared_genre.sql > main.sql
+cat bands_band.sql >> main.sql
+cat bands_bandmember.sql >> main.sql
+cat bands_band_genre.sql >> main.sql
+cat albums_album.sql >> main.sql    
+cat albums_song.sql >> main.sql
+cat albums_album_genre.sql >> main.sql
+cat albums_song_genre.sql >> main.sql
