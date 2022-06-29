@@ -1,11 +1,10 @@
 from django.contrib import admin
 
-from albums import models
+from shared import models
 
 
 to_register = [
-    models.Album,
-    models.Song,
+    models.Genre,
 ]
 
 admin.site.register(to_register)
