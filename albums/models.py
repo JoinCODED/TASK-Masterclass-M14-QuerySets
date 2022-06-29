@@ -31,6 +31,10 @@ class Album(TimestampMixin, models.Model):
     def __str__(self) -> str:
         return self.name
 
+    @classmethod
+    def get_top_ten(cls) -> models.QuerySet["Album"]:
+        return cls.objects.all()
+
     @property
     def singles(self) -> models.QuerySet["Song"]:
         return Song.objects.all()
@@ -45,7 +49,7 @@ class Album(TimestampMixin, models.Model):
 
     @property
     def price(self) -> Decimal:
-        return self.songs.all().aggregate(price=models.Sum("price"))["price"]
+        return Decimal()
 
 
 class Song(TimestampMixin, models.Model):
