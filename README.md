@@ -67,3 +67,21 @@ Use the following [reference](https://docs.djangoproject.com/en/4.0/ref/models/q
 4. Select the highest purchase count single.
 5. If there are two songs that have the same purchase count then take any one by random.
 6. If there are no singles at all, return `None`
+
+## QuerySet Task II
+
+### Aggregation
+
+1. Go to `albums/models.py`.
+2. We will editing the `price` computed property method of `Album`.
+3. Get all the prices of the related songs to the current album.
+4. Calculate the total and return it.
+
+### Top Ten
+
+We will getting the top ten `songs`, `albums`, and `bands`. Work in that order, each class has a classmethod `get_top_ten` where you will be adding the logic. For `songs` you will get the top ten based on the song's `purchase_count`. For `albums` you will get the top ten based on the album's `purchase_count`. For `bands`, you will get the top ten based on the `revenue` generated. Calculate the revenue for bands by getting all the purchase counts for the albums and multiplying it by their total price. Add to it the individual songs bought (i.e., each `Song` and their `purchase_count` and `price` must be supplied), so sum up all the `price * purchase_count` for the songs. Adding these two together will give you the `revenue` for each `band`. The top ten highest revenue generating bands must be returned in this function (not the revenue, the bands with the highest revenues).
+
+### Top Ten Bonus
+
+1. Go to `shared/models.py`.
+2. Add the logic for `top_ten genres` based on the different enumerations.
