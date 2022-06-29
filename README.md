@@ -57,6 +57,7 @@ Use the following [reference](https://docs.djangoproject.com/en/4.0/ref/models/q
    - Sort them by `purchase_count`.
    - Select the highest purchase count single.
    - If there are two songs that have the same purchase count then take any one by random.
+   - If there are no `feature` songs at all, return `None`
 
 #### Band QuerySets Bonus
 
@@ -65,3 +66,4 @@ Use the following [reference](https://docs.djangoproject.com/en/4.0/ref/models/q
 3. Sort them by `purchase_count`.
 4. Select the highest purchase count single.
 5. If there are two songs that have the same purchase count then take any one by random.
+6. If there are no singles at all, return `None`
