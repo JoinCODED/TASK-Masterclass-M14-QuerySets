@@ -20,3 +20,48 @@ Searching... Aggregating... Indexing...
 3. Open the database using `poetry run manage dbshell`.
 4. Load the mock data using `\i ./fixtures/main.sql`.
    - Note: you might some errors, ignore them.
+
+## QuerySet Task I
+
+Use the following [reference](https://docs.djangoproject.com/en/4.0/ref/models/querysets/) to your advantage.
+
+### Album QuerySets
+
+1. Go to `albums.models.py`.
+2. Go to `Album.singles`, this is a computed property.
+   - Add the correct queryset to return the songs belonging to this album.
+   - HINT 1: use `self` to refer to the current instance of album.
+   - HINT 2: songs are related to an instance of albums through the name `songs`.
+3. Go to the next computed property `features`.
+   - Add the correct queryset to return the songs belonging to this album that contain the word `feat` (case-insensitive) in their name.
+   - HINT: you will need to use the `contain` lookup.
+4. Go to the next computed property `top_single`.
+   - Get the top single sold in this album based on `Song.purchase_count` (i.e., the highest `purchase_count` is the top single).
+   - If there are two songs that have the same purchase count then take any one by random.
+   - HINT: you will need to filter the related `songs` by `is_single`, order the query set by `purchase_count` and take the highest one.
+   - NOTE: we are only looking at singles (i.e., `Song.is_single == True`).
+
+### Band QuerySets
+
+1. Go to `bands.models.py`.
+2. Go to `Band.singles`.
+   - Add the correct queryset to return the singles belonging to this album.
+   - A single is not directly related to the band, you need to filter by the intermediate model Album.
+   - NOTE: remember that we need `is_single=True`.
+3. Go to `Band.features`.
+   - Get all the songs that have `feat` in their `name`.
+   - HINT: you will need to use the `contain` lookup.
+4. Go to `Band.top_single`.
+   - Get all the singles related to this band.
+   - Filter them by `is_single=True`.
+   - Sort them by `purchase_count`.
+   - Select the highest purchase count single.
+   - If there are two songs that have the same purchase count then take any one by random.
+
+#### Band QuerySets Bonus
+
+1. Go to `Band.top_single`.
+2. Get all the songs related to this band that have `feat` in their name.
+3. Sort them by `purchase_count`.
+4. Select the highest purchase count single.
+5. If there are two songs that have the same purchase count then take any one by random.
