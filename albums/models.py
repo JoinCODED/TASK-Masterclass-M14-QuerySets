@@ -8,6 +8,7 @@ from shared.models import TimestampMixin
 
 if TYPE_CHECKING:
     from django.db.models.expressions import Combinable
+    from django.db.models.manager import RelatedManager
 
     from bands.models import BandForeignKey
     from shared.models import GenreM2M
@@ -16,6 +17,8 @@ if TYPE_CHECKING:
 
 
 class Album(TimestampMixin, models.Model):
+    songs: "RelatedManager[Song]"
+
     name = models.CharField(max_length=50)
     band: "BandForeignKey" = models.ForeignKey(
         "bands.Band", on_delete=models.CASCADE, related_name="albums"
@@ -42,7 +45,7 @@ class Album(TimestampMixin, models.Model):
 
     @property
     def price(self) -> Decimal:
-        return Decimal()
+        return self.songs.all().aggregate(price=models.Sum("price"))["price"]
 
 
 class Song(TimestampMixin, models.Model):
