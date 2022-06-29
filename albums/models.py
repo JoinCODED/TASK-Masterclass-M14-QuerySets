@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Optional, Union
 
 from django.db import models
 
@@ -7,8 +7,12 @@ from shared.models import TimestampMixin
 
 
 if TYPE_CHECKING:
+    from django.db.models.expressions import Combinable
+
     from bands.models import BandForeignKey
     from shared.models import GenreM2M
+
+    AlbumForeignKey = models.ForeignKey[Union["Album", "Combinable"], "Album"]
 
 
 class Album(TimestampMixin, models.Model):
@@ -43,6 +47,9 @@ class Album(TimestampMixin, models.Model):
 
 class Song(TimestampMixin, models.Model):
     name = models.CharField(max_length=100)
+    album: "AlbumForeignKey" = models.ForeignKey(
+        "albums.Album", on_delete=models.CASCADE, related_name="songs"
+    )
     genre: "GenreM2M" = models.ManyToManyField(
         "shared.Genre", related_name="songs"
     )
