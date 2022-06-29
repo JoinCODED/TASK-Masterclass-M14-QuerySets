@@ -6,9 +6,10 @@ from django.db import models
 
 
 if TYPE_CHECKING:
-    from django.db.models.manager import (  # pylint: disable=no-name-in-module
-        RelatedManager,
-    )
+    from django.db.models.manager import RelatedManager
+
+    from albums.models import Album, Song
+    from bands.models import Band
 
 GenreM2M = models.ManyToManyField[Sequence["Genre"], "RelatedManager[Genre]"]
 
@@ -28,7 +29,11 @@ class GenreBy(IntEnum):
 
 
 class Genre(TimestampMixin, models.Model):
-    name = models.CharField(max_length=25)
+    albums: "RelatedManager[Album]"
+    bands: "RelatedManager[Band]"
+    songs: "RelatedManager[Song]"
+
+    name = models.CharField(max_length=50)
 
     def __str__(self) -> str:
         return self.name
