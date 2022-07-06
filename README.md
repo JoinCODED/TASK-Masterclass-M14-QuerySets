@@ -77,9 +77,9 @@ Use the following [reference](https://docs.djangoproject.com/en/4.0/ref/models/q
 3. Get all the prices of the related songs to the current album.
 4. Calculate the total and return it.
 
-### Top Ten
+### Annotation & Sorting
 
-We will getting the top ten `songs`, `albums`, and `bands`. Work in that order, each class has a classmethod `get_top_ten` where you will be adding the logic. For `songs` you will get the top ten based on the song's `purchase_count`. For `albums` you will get the top ten based on the album's `purchase_count`. For `bands`, you will get the top ten based on the `revenue` generated. Calculate the revenue for bands by getting all the purchase counts for the albums and multiplying it by their total price. Add to it the individual songs bought (i.e., each `Song` and their `purchase_count` and `price` must be supplied), so sum up all the `price * purchase_count` for the songs. Adding these two together will give you the `revenue` for each `band`. The top ten highest revenue generating bands must be returned in this function (not the revenue, the bands with the highest revenues).
+We will getting the top ten `songs`, `albums`, and `bands`. Work in that order, each class has a classmethod `get_top_ten` where you will be adding the logic. For `songs` you will get the top ten based on the song's `purchase_count`. For `albums` you will get the top ten based on the album's `purchase_count`. For `bands`, you will get the top ten based on the `revenue` generated. Calculate the revenue for bands by getting all the songs bought with their `purchase_count` and `price`. Sum up all the `price * purchase_count` for the songs and that is the band's revenue. The top ten highest revenue generating bands must be returned in this function (not the revenue, the bands with the highest revenues). Hint: you will need to annotate your query set and use `F` objects to get the desired output.
 
 ### Top Ten Bonus
 
